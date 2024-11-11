@@ -26,7 +26,7 @@ def clean_education(x):
     if 'Professional degree' in x:
         return 'Professional degree'
     return 'Less than a Bachelors'
-@st.cache
+@st.cache_data
 def load_data():
     df = pd.read_csv('dataset/survey_results_public.csv')
     df = df[["Country", "EdLevel", "YearsCodePro", "Employment", "ConvertedComp"]]
@@ -60,5 +60,19 @@ def show_explore_page():
     ax1.pie(data,labels=data.index,autopct='%1.1f',shadow=True,startangle=90)
     ax1.axis('equal')
 
-    st.write("""#### Number of data from different countries""")
+    st.write("""
+    #### Number of data from different countries
+    """)
     st.pyplot(fig1)
+
+    st.write("""
+    #### Mean Salary Based On Country
+    """)
+    data = df.groupby(["Country"])['Salary'].mean().sort_values(ascending=True)
+    st.bar_chart(data)
+
+    st.write("""
+        #### Mean Salary Based On Experience
+        """)
+    data = df.groupby(["YearsCodePro"])['Salary'].mean().sort_values(ascending=True)
+    st.line_chart(data)
