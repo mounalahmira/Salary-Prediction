@@ -2,7 +2,10 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 import pickle
-
+st.set_page_config(
+    page_title="Salary Prediction",
+    page_icon="💵"
+)
 def load_model():
     with open('saved_steps.pkl', 'rb') as file:
         data = pickle.load(file)
