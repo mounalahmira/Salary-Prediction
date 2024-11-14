@@ -4,7 +4,7 @@ import streamlit as st
 import pickle
 
 def load_model():
-    with open('dataset/survey_results_public.csv', 'rb') as file:
+    with open('saved_steps.pkl', 'rb') as file:
         data = pickle.load(file)
     return data
 
